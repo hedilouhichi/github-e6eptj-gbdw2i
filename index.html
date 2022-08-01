@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html id="page1">
+  <head>
+    <title>Places Search Box</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <div class="logosidebar">
+    <img
+      style="float: right; margin-right: 35%; position: relative"
+      src="https://www.stb.com.tn/img/logo_stb.png"
+    />
+    <br />
+    <span
+      style="color: white; font-size: 30px; cursor: pointer; position: relative"
+      onclick="openNav()"
+    >
+      &nbsp; &nbsp;&#9776;
+    </span>
+  </div>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+      >&times;</a
+    >
+    <a href="#" onclick="home()">Home</a>
+
+    <a href="https://www.stb.com.tn/fr/">Services</a>
+    <a href="#">Clients</a>
+    <a href="https://www.stb.com.tn/fr/actualites/">Actualites</a>
+    <a href="https://www.stb.com.tn/fr/site/stb/contact/">Contact</a>
+  </div>
+
+  <script type="module" src="index.ts"></script>
+
+  <input
+    id="pac-input"
+    class="controls"
+    type="text"
+    placeholder="Search Box"
+    value="stb"
+  />
+
+  <div id="map"></div>
+
+  <!-- 
+     The defer attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initAutocomplete&libraries=places&v=weekly"
+    defer
+  ></script>
+  <script type="module" src="./index.ts"></script>
+
+  <div id="page2" style="display: none">
+    <div class="body">
+      <br />
+
+      <form>
+        <br />
+        <br />
+        <fieldset class="fieldset">
+          <legend class="s">Nos Service</legend>
+
+          <center>
+            <select name="service">
+              <option value="1">Retrait</option>
+              <option value="2">Creation de compte</option>
+              <option value="3">Demande de credit</option>
+            </select>
+          </center>
+        </fieldset>
+        <br />
+        <fieldset>
+          <legend>Nos Coordonner</legend>
+          <table>
+            <tr>
+              <td>
+                <img src="https://cdn-icons-png.flaticon.com/512/2830/2830155.png" alt="" width="24px" height="24px">
+                <label class="nom" id="nom"></label>
+              </td>
+            </tr>
+            <tr>
+              
+              <td>
+
+                <img src="https://cdn-icons-png.flaticon.com/512/67/67347.png" alt="" width="24px" height="24px">
+                <label id="address">  </label>
+              </td>
+            </tr>
+            <td>
+              <img src="https://cdn-icons.flaticon.com/png/512/2811/premium/2811915.png?token=exp=1659384084~hmac=00beaea281ff013e199a0ad92812157d" alt="" width="24px" height="24px">
+
+              <label id="cp"> Rating </label>
+            </td>
+          </table>
+        </fieldset>
+        <br />
+        <fieldset>
+          <legend>Actuelement</legend>
+          <table>
+            <tr>
+          <td>
+            <img src="https://cdn-icons-png.flaticon.com/512/942/942810.png" alt="" width="24px" height="24px">
+          <label type="text" name="jours">{Lun-Ven}</label>
+          </td>
+         </tr>
+         <tr> 
+            <td>
+              <img src="https://cdn-icons-png.flaticon.com/512/1827/1827463.png" alt="" width="24px" height="24px">
+
+              <label type="text" name="typesecence">
+                Seance Unique:08:00-14:00
+              </label>
+         </td>
+         </tr>
+          
+
+          <tr>
+            <td>
+              <img src="https://cdn-icons.flaticon.com/png/512/5585/premium/5585294.png?token=exp=1659384262~hmac=85cdd1492eb08d45f7724ceb17d7ee2c" alt="" width="24px" height="24px">
+
+              <label type="text" name="status"> Open </label>
+
+            </td>
+          </tr>
+          </table>
+        </fieldset>
+        <br>
+        <button type="button" id="myBtn" class="button-19">
+          Consulter Ticket
+        </button>
+      </form>
+    </div>
+  </div>
+  <script>
+    function openNav() {
+      document.getElementById('mySidenav').style.width = '250px';
+    }
+
+    function closeNav() {
+      document.getElementById('mySidenav').style.width = '0';
+    }
+  </script>
+  <script type="module" src="index.ts"></script>
+  <script>
+    function home() {
+      document.getElementById('map').style.display = 'block';
+      document.getElementById('pac-input').style.display = 'block';
+
+      document.getElementById('page2').style.display = 'none';
+    }
+  </script>
+</html>
