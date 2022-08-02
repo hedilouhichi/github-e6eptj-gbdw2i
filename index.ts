@@ -13,6 +13,8 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+
+
 navigator.geolocation.getCurrentPosition(initAutocomplete);
 navigator.geolocations;
 function initAutocomplete(position) {
@@ -89,20 +91,49 @@ function initAutocomplete(position) {
           
         })
       );
+ 
+
+
+    
+
       markers.forEach((marker) => {
         marker.addListener('click', (mapsMouseEvent: any) => {
-          document.getElementById('map').style.display = 'none';
-          document.getElementById('pac-input').style.display = 'none';
-          document.getElementById('page2').style.display = 'block';
-          document.getElementById('nom').innerHTML = marker.getTitle();
-        if (marker.getPosition()==place.geometry.location){
-          document.getElementById('address').innerHTML=place.formatted_address;
-          document.getElementById('cp').innerHTML = place.rating;
-        }
-        
+
+          fetch("https://openbank.stb.com.tn/entreeenrelation/getagences").then(function(res) {
+            if (res.ok) {
+              return res.json();
+              
+            }
+          })
+          .then(function(value) {
+            if (place.geometry.location==marker.getPosition()){
+
+            for (var i=0 ;i<value.length;i++){
+                console.log(place.geometry.location.lat())
+              if(value[i].Latitude==place.geometry.location.lat()){
+
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('pac-input').style.display = 'none';
+                document.getElementById('page2').style.display = 'block';
+                document.getElementById('nom').innerHTML = value[i].Libelle;
+                document.getElementById('address').innerHTML=value[i].addresse;
+                document.getElementById('cp').innerHTML = value[i].CodePostal;
+                    }
+                  }
+                   
+
+            }
+
+
+
+          })
+          .catch(function(err) {
+            // Une erreur est survenue
+          });  
         });
       });
-
+      
+      
       if (place.geometry.viewport) {
         // Only geocodes have viewport.
         bounds.union(place.geometry.viewport);
@@ -112,6 +143,8 @@ function initAutocomplete(position) {
     });
     map.fitBounds(bounds);
   });
+
+ 
 }
 
 declare global {
