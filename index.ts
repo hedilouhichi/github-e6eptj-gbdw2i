@@ -106,11 +106,14 @@ function initAutocomplete(position) {
             }
           })
           .then(function(value) {
+            
             if (place.geometry.location==marker.getPosition()){
-
             for (var i=0 ;i<value.length;i++){
+              const v= value[i].Latitude.replace("," , ".");
+              console.log(v);
+
                 console.log(place.geometry.location.lat())
-              if(value[i].Latitude==place.geometry.location.lat()){
+              if(v==place.geometry.location.lat()){
 
                 document.getElementById('map').style.display = 'none';
                 document.getElementById('pac-input').style.display = 'none';
